@@ -15,7 +15,8 @@ with st.container():
         df['Name'].to_list())
     table = []
     for i in options:
-        if options:
+    if options:
+        for i in options:
             table.append(pd.DataFrame(zip(df.loc[df['Name']=='{}'.format(i)]['Name'], df.loc[df['Name']=='{}'.format(i)]['Length']), columns=['Name', 'Length']))
     table = pd.concat(table, ignore_index=True)
     
