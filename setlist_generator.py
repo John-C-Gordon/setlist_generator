@@ -18,7 +18,7 @@ with st.container():
     if options:
         for i in options:
             table.append(pd.DataFrame(zip(df.loc[df['Name']=='{}'.format(i)]['Name'], df.loc[df['Name']=='{}'.format(i)]['Length']), columns=['Name', 'Length']))
-    elif:
+    if not options:
         pass
     table = pd.concat(table, ignore_index=True)
     
