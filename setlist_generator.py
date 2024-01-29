@@ -1,10 +1,7 @@
-from math import gamma
-from tkinter import E
 import streamlit as st
 import pandas as pd
 import numpy as np
 import streamlit.components.v1 as components
-from PIL import Image
 import itertools
 import time as t
 from datetime import datetime
