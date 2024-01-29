@@ -6,7 +6,7 @@ import itertools
 import time as t
 from datetime import datetime
 
-df = pd.read_csv('Downloads/cougar_songs.csv', index_col=False)
+df = pd.read_csv('cougar_songs.csv', index_col=False)
 
 with st.container():
 
