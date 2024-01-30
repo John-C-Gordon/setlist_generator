@@ -20,6 +20,7 @@ with st.container():
             table.append(pd.DataFrame(zip(df.loc[df['Name']=='{}'.format(i)]['Name'], df.loc[df['Name']=='{}'.format(i)]['Length']), columns=['Name', 'Length']))
 
         table = pd.concat(table, ignore_index=True)
+        table.index = table.index + 1
     
         # Getting total length
         def get_sec(time_str):
