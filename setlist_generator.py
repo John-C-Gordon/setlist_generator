@@ -15,22 +15,24 @@ with st.container():
         df['Name'].to_list())
     table = []
     
-    if options:
+    if options != []:
         for i in options:
             table.append(pd.DataFrame(zip(df.loc[df['Name']=='{}'.format(i)]['Name'], df.loc[df['Name']=='{}'.format(i)]['Length']), columns=['Name', 'Length']))
-    if not options:
-        pass
-    table = pd.concat(table, ignore_index=True)
-    
-    # Getting total length
-    def get_sec(time_str):
-        m, s = time_str.split(':')
-        return int(m) * 60 + int(s)
-    
-    sum = 0
-    for j in table['Length']:
-        sum = sum + get_sec(j)
-    st.table(table)
 
-    st.markdown('''
-        **Total:** :red[{}] minutes'''.format(round(sum/60, 2)))
+        table = pd.concat(table, ignore_index=True)
+    
+        # Getting total length
+        def get_sec(time_str):
+            m, s = time_str.split(':')
+            return int(m) * 60 + int(s)
+        
+        sum = 0
+        for j in table['Length']:
+            sum = sum + get_sec(j)
+        st.table(table)
+
+        st.markdown('''
+            **Total:** :red[{}] minutes'''.format(round(sum/60, 2)))
+    if options == []:
+        st.markdown('''
+         **Total:** :red[0] minutes''')
