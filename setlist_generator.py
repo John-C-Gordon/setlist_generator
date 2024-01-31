@@ -7,6 +7,7 @@ import time as t
 from datetime import datetime
 
 df = pd.read_csv('cougar_songs.csv', index_col=False)
+st.set_page_config(page_icon=':bar_chart:')
 
 with st.container():
 
