@@ -8,6 +8,7 @@ from datetime import datetime
 
 df = pd.read_csv('cougar_songs.csv', index_col=False)
 st.set_page_config(page_title='Setlist Generator', page_icon='📊')
+st.sidebar.success('Select a page above.")
 
 with st.container():
 
