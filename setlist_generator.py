@@ -4,7 +4,7 @@ import numpy as np
 import streamlit.components.v1 as components
 import itertools
 import time as t
-from datetime import datetime
+from datetime import timedelta
 
 st.set_page_config(page_icon='📊', page_title='Setlist Generator')
 
@@ -15,7 +15,7 @@ covers = covers.iloc[:,2:7]
 covers['Name'] = covers['Track Name']
 
  # = timedelta(milliseconds = covers['Duration (ms)'][0])
-st.write(covers['Duration (ms)'][0])
+st.write(timedelta(milliseconds = covers['Duration (ms)'][0]))
 # covers = covers[['Name', 'Length']]
 
 # st.sidebar.success('Select a page above.')
