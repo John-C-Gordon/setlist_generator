@@ -14,7 +14,7 @@ covers['Name'] = covers['Track Name']
 
 covers['Length'] = (covers['Duration (ms)'])/1000
 (minutes, seconds) = divmod(covers['Length'], 60)
-st.write('{}'.format(minutes) + ':' + '{}'.format(seconds))
+st.write('{}'.format(str(minutes)) + ':' + '{}'.format(str(seconds)))
 
 covers = covers[['Name', 'Length']]
 
