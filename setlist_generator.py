@@ -9,6 +9,8 @@ from datetime import datetime
 df = pd.read_csv('cougar_songs.csv', index_col=False)
 covers = pd.read_csv('jammin.csv', index_col=False)
 covers = covers.iloc[:,2:7]
+covers['Name'] = covers['Track Name']
+covers['Length] = covers['Duration (ms)']
 
 st.set_page_config(page_icon='📊', page_title='Setlist Generator')
 # st.sidebar.success('Select a page above.')
