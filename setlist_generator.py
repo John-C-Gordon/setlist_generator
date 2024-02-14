@@ -12,10 +12,7 @@ covers = pd.read_csv('jammin.csv', index_col=False)
 covers = covers.iloc[:,2:7]
 covers['Name'] = covers['Track Name']
 
-covers['Length'] = round((covers['Duration (ms)'])/1000)
-(minutes, seconds) = divmod(covers['Length'], 60)
-st.dataframe(zip(minutes, seconds))
-st.write('%d:%d' % (minutes, seconds))
+covers['Length'] = timedelta(milliseconds = covers['Duration (ms)'])
 
 covers = covers[['Name', 'Length']]
 
