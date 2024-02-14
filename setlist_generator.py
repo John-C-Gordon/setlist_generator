@@ -15,7 +15,7 @@ covers['Name'] = covers['Track Name']
 covers['Length'] = round((covers['Duration (ms)'])/1000)
 (minutes, seconds) = divmod(covers['Length'], 60)
 st.dataframe(zip(minutes, seconds))
-st.write('{:02d}'.format(seconds))
+st.write('%d:%d' % (minutes, seconds))
 
 covers = covers[['Name', 'Length']]
 
