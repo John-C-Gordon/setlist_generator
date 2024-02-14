@@ -22,17 +22,14 @@ for i, j in zip(minutes, seconds):
     length.append('{}'.format(i) + ':' '{:02d}'.format(j))
 
 covers['Length'] = length
-# covers = covers[['Name', 'Length']]
 
-# st.sidebar.success('Select a page above.')
 
 with st.container():
 
     checkbox = st.checkbox('Include cover songs:')
+    if checkbox:
+        df = pd.concat([df, covers], join='inner')
     
-    # if checkbox:
-    #     df = pd.concat([df, covers], join='inner')
-    st.dataframe(covers.head())
     options = st.multiselect(
         'Choose Song(s) Here',
         df['Name'].to_list())
