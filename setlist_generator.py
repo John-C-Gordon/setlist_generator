@@ -26,7 +26,7 @@ covers['Length'] = length
 
 with st.container():
 
-    checkbox = st.checkbox('Include cover songs:')
+    checkbox = st.checkbox('Include cover songs *(decide **BEFORE** making the selections)*:')
     if checkbox:
         df = pd.concat([df, covers], join='inner')
     
