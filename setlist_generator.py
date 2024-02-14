@@ -14,8 +14,10 @@ covers['Name'] = covers['Track Name']
 
 covers['Length'] = (covers['Duration (ms)'])/1000
 (minutes, seconds) = divmod(covers['Length'], 60)
+st.write('{}'.format(minutes) + ':' + '{}'.format(seconds))
 
 covers = covers[['Name', 'Length']]
+
 
 st.set_page_config(page_icon='📊', page_title='Setlist Generator')
 # st.sidebar.success('Select a page above.')
