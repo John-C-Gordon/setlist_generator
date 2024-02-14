@@ -16,10 +16,10 @@ covers['Name'] = covers['Track Name']
 
 seconds, ms = divmod(covers['Duration (ms)'], 1000)
 minutes, seconds = divmod(seconds, 60)
-covers['Length'] = []
+length = []
 
 for i, j in zip(minutes, seconds):
-    covers['Length'].append('{}'.format(i) + ':' '{}'.format(j))
+    length.append('{}'.format(i) + ':' '{}'.format(j))
 
 # covers = covers[['Name', 'Length']]
 
