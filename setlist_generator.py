@@ -7,11 +7,18 @@ import time as t
 from datetime import datetime
 
 df = pd.read_csv('cougar_songs.csv', index_col=False)
+covers = pd.read_csv('jammin.csv', index_col=False)
+
 st.set_page_config(page_icon='📊', page_title='Setlist Generator')
 st.sidebar.success('Select a page above.')
 
 with st.container():
 
+    checkbox = st.checkbox('Include cover songs:')
+    
+    # if checkbox:
+    #     df = pd.concat([df, covers], join='inner')
+    st.dataframe(covers.head())
     options = st.multiselect(
         'Choose Song(s) Here',
         df['Name'].to_list())
