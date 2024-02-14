@@ -21,7 +21,7 @@ length = []
 for i, j in zip(minutes, seconds):
     length.append('{}'.format(i) + ':' '{:02d}'.format(j))
 
-st.write(length)
+covers['Length'] = length
 # covers = covers[['Name', 'Length']]
 
 # st.sidebar.success('Select a page above.')
