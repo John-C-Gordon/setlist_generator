@@ -19,7 +19,7 @@ minutes, seconds = divmod(seconds, 60)
 length = []
 
 for i, j in zip(minutes, seconds):
-    length.append('{}'.format(i) + ':' '{}'.format(j))
+    length.append('{}'.format(i) + ':' '{:02d}'.format(j))
 
 st.write(length)
 # covers = covers[['Name', 'Length']]
