@@ -16,7 +16,8 @@ covers['Name'] = covers['Track Name']
 
 seconds, ms = divmod(covers['Duration (ms)'], 1000)
 minutes, seconds = divmod(seconds, 60)
-st.write((f'{int(minutes):01d}:{int(seconds):02d}'))
+for i, j in minutes, seconds:
+    st.write((f'{int(minutes):01d}:{int(seconds):02d}'))
 
 # covers = covers[['Name', 'Length']]
 
