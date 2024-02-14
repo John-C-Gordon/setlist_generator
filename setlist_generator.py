@@ -16,8 +16,8 @@ covers['Name'] = covers['Track Name']
 
 seconds, ms = divmod(covers['Duration (ms)'], 1000)
 minutes, seconds = divmod(seconds, 60)
-times = pd.DataFrame(zip(minutes, seconds))
-st.dataframe(times)
+for i, j in zip(minutes, seconds):
+    st.write('{}'.format(i) + ':' '{}'.format(j))
 
 # covers = covers[['Name', 'Length']]
 
