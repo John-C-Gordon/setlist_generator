@@ -13,8 +13,8 @@ covers = covers.iloc[:,2:7]
 covers['Name'] = covers['Track Name']
 
  # = timedelta(milliseconds = covers['Duration (ms)'][0])
-st.write(covers['Duration (ms)'][0])
-covers = covers[['Name', 'Length']]
+st.write(timedelta(milliseconds = covers['Duration (ms)'][0]))
+# covers = covers[['Name', 'Length']]
 
 
 st.set_page_config(page_icon='📊', page_title='Setlist Generator')
