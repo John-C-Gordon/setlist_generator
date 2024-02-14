@@ -6,6 +6,8 @@ import itertools
 import time as t
 from datetime import datetime
 
+st.set_page_config(page_icon='📊', page_title='Setlist Generator')
+
 df = pd.read_csv('cougar_songs.csv', index_col=False)
 
 covers = pd.read_csv('jammin.csv', index_col=False)
@@ -16,8 +18,6 @@ covers['Name'] = covers['Track Name']
 st.write(covers['Duration (ms)'][0])
 # covers = covers[['Name', 'Length']]
 
-
-st.set_page_config(page_icon='📊', page_title='Setlist Generator')
 # st.sidebar.success('Select a page above.')
 
 with st.container():
