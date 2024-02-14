@@ -14,8 +14,10 @@ covers = pd.read_csv('jammin.csv', index_col=False)
 covers = covers.iloc[:,2:7]
 covers['Name'] = covers['Track Name']
 
- # = timedelta(milliseconds = covers['Duration (ms)'][0])
-st.write(timedelta(milliseconds = covers['Duration (ms)'][0]))
+seconds, ms = divmod(covers['Duration (ms)', 1000)
+minutes, seconds = divmod(seconds, 60)
+st.write((f'{int(minutes):01d}:{int(seconds):02d}'))
+
 # covers = covers[['Name', 'Length']]
 
 # st.sidebar.success('Select a page above.')
