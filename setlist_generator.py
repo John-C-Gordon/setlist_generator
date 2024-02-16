@@ -13,6 +13,7 @@ df = pd.read_csv('cougar_songs.csv', index_col=False)
 covers = pd.read_csv('jammin.csv', index_col=False)
 covers = covers.iloc[:,2:7]
 covers['Name'] = covers['Track Name']
+covers['Count'] = 1
 
 seconds, ms = divmod(covers['Duration (ms)'], 1000)
 minutes, seconds = divmod(seconds, 60)
@@ -56,6 +57,7 @@ with st.container():
 
         st.markdown('''
             **Total:** :red[{}] minutes :red[{}] seconds'''.format(m, s))
+        st.dataframe(covers)
         
     if options == []:
         st.markdown('''
