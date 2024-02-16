@@ -24,7 +24,7 @@ for i, j in zip(minutes, seconds):
 
 covers['Length'] = length
 
-st.dataframe(covers.groupby(['Artist Name(s)']).count()['Count'])
+# st.dataframe(covers.groupby(['Artist Name(s)']).count()['Count'])
 
 with st.container():
 
