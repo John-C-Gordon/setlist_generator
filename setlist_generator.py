@@ -55,7 +55,7 @@ with st.container():
         m, s = divmod(sum, 60)
 
         st.markdown('''
-            **Total:** :red[{}] minutes'''.format(m))
+            **Total:** :red[{}] minutes :red[{}] seconds'''.format(m, s))
         st.write(divmod(sum, 60))
     if options == []:
         st.markdown('''
