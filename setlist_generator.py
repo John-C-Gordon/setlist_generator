@@ -11,7 +11,7 @@ st.set_page_config(page_icon='📊', page_title='Setlist Generator')
 df = pd.read_csv('cougar_songs.csv', index_col=False)
 
 covers = pd.read_csv('jammin.csv', index_col=False)
-covers = covers.iloc[:,2:7]
+# covers = covers.iloc[:,2:7]
 covers['Name'] = covers['Track Name']
 covers['Count'] = 1
 
