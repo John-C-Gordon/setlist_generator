@@ -57,7 +57,7 @@ with st.container():
 
         st.markdown('''
             **Total:** :red[{}] minutes :red[{}] seconds'''.format(m, s))
-        st.dataframe(covers.groupby(['Artist Name(s)'].count()['Count'])
+        # st.dataframe(covers.groupby(['Artist Name(s)'].count()['Count'])
         
     if options == []:
         st.markdown('''
