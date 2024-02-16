@@ -52,8 +52,10 @@ with st.container():
             sum = sum + get_sec(j)
         st.table(table)
 
+        m, s = divmod(sum, 60)
+
         st.markdown('''
-            **Total:** :red[{}] minutes'''.format(round(sum/60, 2)))
+            **Total:** :red[{}] minutes'''.format(m))
         st.write(divmod(sum, 60))
     if options == []:
         st.markdown('''
