@@ -24,8 +24,6 @@ for i, j in zip(minutes, seconds):
 
 covers['Length'] = length
 
-st.dataframe(covers.groupby(['Key']).count()['Count'])
-
 with st.container():
 
     checkbox = st.checkbox('Include cover songs *(decide **BEFORE** making the selections)*:')
