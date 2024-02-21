@@ -55,7 +55,7 @@ with st.container():
         m, s = divmod(sum, 60)
 
         st.markdown('''
-            **Total:** :red[{}] minutes'''.format(sum/60, 2))
+            **Total:** :red[{}] minutes'''.format(round(sum/60, 2)))
         # st.dataframe(covers.groupby(['Artist Name(s)'].count()['Count'])
                  
         
