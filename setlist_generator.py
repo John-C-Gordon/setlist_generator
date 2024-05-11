@@ -37,7 +37,8 @@ with st.container():
     
     if options != []:
         for i in options:
-            table.append(pd.DataFrame(zip(df.loc[df['Name']=='{}'.format(i)]['Name'], df.loc[df['Name']=='{}'.format(i)]['Length']), columns=['Name', 'Length']))
+            table.append(pd.DataFrame(zip(df.loc[df['Name']=='{}'.format(i)]['Name'], df.loc[df['Name']=='{}'.format(i)]['Length'],
+                                         df.loc[df['Name']=='{}'.format(i)]['Key']), columns=['Name', 'Length', 'Key']))
 
         table = pd.concat(table, ignore_index=True)
         table.index = table.index + 1
