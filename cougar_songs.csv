@@ -1,25 +1,25 @@
-Name,Length,Album,Year
-In Bold Print,3:59,Colors of I,2021
-Cutting Edge,2:45,Leaving Olympus,2019
-Grey Storm,3:24,Leaving Olympus,2019
-Dreams of Drifting,4:17,Leaving Olympus,2019
-On and On,4:08,Clean Sweep,2020
-Take My Word,3:56,Clean Sweep,2020
-Beyond These Walls,2:24,Qualm Sundae,2020
-Falcon's View,3:05,Qualm Sundae,2020
-Elliewood,3:00,Qualm Sundae,2020
-Time On My Side,2:42,Colors of I,2021
-Hangfire,1:52,Colors of I,2021
-Protect and Serve,1:36,Colors of I,2021
-Trial of the Scourge,2:53,Colors of I,2021
-Ash,1:45,Colors of I,2021
-One Less Day,4:20,Colors of I,2021
-Doldrums,2:30,Colors of I,2021
-"Glory, Glory",6:10,Colors of I,2021
-Guess I Am Obliged,2:09,The Blind Hunter,2023
-Neck Romancer,3:12,The Blind Hunter,2023
-Sky Behind Your Eyes,3:01,The Blind Hunter,2023
-Qu'ils Mangent,3:26,The Blind Hunter,2023
-The Blind Hunter,3:39,The Blind Hunter,2023
-Yours or Mine?,3:38,Single,2023
-Solomon Grundy,4:09,Single,2023
+Name,Length,Album,Year,Key
+In Bold Print,3:59,Colors of I,2021,A
+Cutting Edge,2:45,Leaving Olympus,2019,A# min.
+Grey Storm,3:24,Leaving Olympus,2019,E min.
+Dreams of Drifting,4:17,Leaving Olympus,2019,F.
+On and On,4:08,Clean Sweep,2020,C
+Take My Word,3:56,Clean Sweep,2020,D
+Beyond These Walls,2:24,Qualm Sundae,2020,G
+Falcon's View,3:05,Qualm Sundae,2020,D
+Elliewood,3:00,Qualm Sundae,2020,C#
+Time On My Side,2:42,Colors of I,2021,G
+Hangfire,1:52,Colors of I,2021,C# min.
+Protect and Serve,1:36,Colors of I,2021,E min.
+Trial of the Scourge,2:53,Colors of I,2021,B min.
+Ash,1:45,Colors of I,2021,C min.
+One Less Day,4:20,Colors of I,2021,B min.
+Doldrums,2:30,Colors of I,2021,F min.
+"Glory, Glory",6:10,Colors of I,2021,E
+Guess I Am Obliged,2:09,The Blind Hunter,2023,G min.
+Neck Romancer,3:12,The Blind Hunter,2023, D min.
+Sky Behind Your Eyes,3:01,The Blind Hunter,2023,C
+Qu'ils Mangent,3:26,The Blind Hunter,2023,Eb min.
+The Blind Hunter,3:39,The Blind Hunter,2023,D
+Yours or Mine?,3:38,Single,2023,Ab
+Solomon Grundy,4:09,Single,2023,A min.
