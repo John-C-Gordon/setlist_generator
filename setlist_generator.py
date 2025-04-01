@@ -116,7 +116,7 @@ if data['selected_rows'] is not None:
     AgGrid(selected,
            gridOptions=gridOptions2,
            allow_unsafe_jscode=True,
-           theme='BALHAM',
+           theme='balham',
            fit_columns_on_grid_load=True)
     
     for i in selected['Length']:
