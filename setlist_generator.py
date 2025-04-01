@@ -1,65 +1,146 @@
-import streamlit as st
+import streamlit as st  # pip install streamlit=1.12.0
 import pandas as pd
-import numpy as np
-import streamlit.components.v1 as components
+from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, JsCode # pip install streamlit-aggrid==0.2.3
 import itertools
 import time as t
 from datetime import timedelta
+import plotly.figure_factory as ff
+from datetime import date
+import plotly.graph_objs as go
+
+def createImage(df):
+    fig = ff.create_table(df, index=False)
+    fig.layout.width = 250
+    fig.layout.update({'title': 'Starry Night'})
+    fig.write_image("image.png", scale=2)
+
+today = date.today()
+formatted_date_2 = today.strftime("%B/%d/%Y") # Day/month/year
+
 
 st.set_page_config(page_icon='📊', page_title='Setlist Generator')
+st.title('Song Selection:')
+# Getting total length
+def get_sec(time_str):
+    m, s = time_str.split(':')
+    return int(m) * 60 + int(s)
 
-df = pd.read_csv('cougar_songs.csv', index_col=False)
+sum = 0
 
-covers = pd.read_csv('jammin.csv', index_col=False)
-# covers = covers.iloc[:,2:7]
-covers['Name'] = covers['Track Name']
-covers['Count'] = 1
+m, s = divmod(sum, 60)
 
-seconds, ms = divmod(covers['Duration (ms)'], 1000)
-minutes, seconds = divmod(seconds, 60)
-length = []
+onRowDragEnd = JsCode("""
+function onRowDragEnd(e) {
+    console.log('onRowDragEnd', e);
+}
+""")
 
-for i, j in zip(minutes, seconds):
-    length.append('{}'.format(i) + ':' '{:02d}'.format(j))
+getRowNodeId = JsCode("""
+function getRowNodeId(data) {
+    return data.id
+}
+""")
 
-covers['Length'] = length
+onGridReady = JsCode("""
+function onGridReady() {
+    immutableStore.forEach(
+        function(data, index) {
+            data.id = index;
+            });
+    gridOptions.api.setRowData(immutableStore);
+    }
+""")
 
-with st.container():
+onRowDragMove = JsCode("""
+function onRowDragMove(event) {
+    var movingNode = event.node;
+    var overNode = event.overNode;
 
-    checkbox = st.checkbox('Include cover songs *(decide **BEFORE** making the selections)*:')
-    if checkbox:
-        df = pd.concat([df, covers], join='inner')
+    var rowNeedsToMove = movingNode !== overNode;
+
+    if (rowNeedsToMove) {
+        var movingData = movingNode.data;
+        var overData = overNode.data;
+
+        immutableStore = newStore;
+
+        var fromIndex = immutableStore.indexOf(movingData);
+        var toIndex = immutableStore.indexOf(overData);
+
+        var newStore = immutableStore.slice();
+        moveInArray(newStore, fromIndex, toIndex);
+
+        immutableStore = newStore;
+        gridOptions.api.setRowData(newStore);
+
+        gridOptions.api.clearFocusedCell();
+    }
+
+    function moveInArray(arr, fromIndex, toIndex) {
+        var element = arr[fromIndex];
+        arr.splice(fromIndex, 1);
+        arr.splice(toIndex, 0, element);
+    }
+}
+""")
+
+
+data = pd.read_csv('cougar_songs.csv')
+
+gb1 = GridOptionsBuilder.from_dataframe(data)
+gb1.configure_selection(selection_mode='multiple', use_checkbox=True)
+gridOptions = gb1.build()
+
+data = AgGrid(data,
+            gridOptions=gridOptions,
+            allow_unsafe_jscode=True,
+            update_mode=GridUpdateMode.SELECTION_CHANGED,
+            fit_columns_on_grid_load=True
+)
+
+# st.dataframe(data['selected_rows'])
+
+if data['selected_rows'] is not None:
+    st.subheader("Setlist")
+
+    selected = pd.DataFrame(data['selected_rows'].reset_index(drop=True))
+    selected.index = selected.index + 1
+
+    gb2 = GridOptionsBuilder.from_dataframe(selected)
+    gb2.configure_default_column(rowDrag = False, rowDragManaged = True, rowDragEntireRow = True, 
+                            rowDragMultiRow=True)
+    gb2.configure_column('Name', rowDrag = True, rowDragEntireRow = True)
+    gb2.configure_grid_options(rowDragManaged = True, onRowDragEnd = onRowDragEnd,
+                            deltaRowDataMode = True, getRowNodeId = getRowNodeId, 
+                            onGridReady = onGridReady, animateRows = True, 
+                            onRowDragMove = onRowDragMove)
+    gridOptions2 = gb2.build()
+
     
-    options = st.multiselect(
-        'Choose Song(s) Here',
-        df['Name'].to_list())
-    table = []
+    AgGrid(selected,
+           gridOptions=gridOptions2,
+           allow_unsafe_jscode=True,
+           theme='Inventory',
+           fit_columns_on_grid_load=True)
     
-    if options != []:
-        for i in options:
-            table.append(pd.DataFrame(zip(df.loc[df['Name']=='{}'.format(i)]['Name'], df.loc[df['Name']=='{}'.format(i)]['Length'],
-                                         df.loc[df['Name']=='{}'.format(i)]['Key']), columns=['Name', 'Length', 'Key']))
-
-        table = pd.concat(table, ignore_index=True)
-        table.index = table.index + 1
+    for i in selected['Length']:
+        sum = sum + get_sec(i)
+    st.markdown('''
+        **Total:** :red[{}] minutes'''.format(round(sum/60, 2)))
     
-        # Getting total length
-        def get_sec(time_str):
-            m, s = time_str.split(':')
-            return int(m) * 60 + int(s)
-        
-        sum = 0
-        for j in table['Length']:
-            sum = sum + get_sec(j)
-        st.table(table)
+    createImage(selected['Name'].reset_index())
 
-        m, s = divmod(sum, 60)
-
-        st.markdown('''
-            **Total:** :red[{}] minutes'''.format(round(sum/60, 2)))
-        # st.dataframe(covers.groupby(['Artist Name(s)'].count()['Count'])
-                 
-        
-    if options == []:
-        st.markdown('''
-         **Total:** :red[0] minutes''')
+# Download button
+    
+else:
+    pass
+''
+with open("image.png", "rb") as file:
+        st.download_button(
+            "Download Image",
+            data=file,
+            file_name="setlist {}.png".format(formatted_date_2),
+            mime="setlist/png",
+            icon=":material/download:",
+            on_click='rerun'
+        )
