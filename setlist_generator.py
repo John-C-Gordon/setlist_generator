@@ -8,12 +8,6 @@ import plotly.figure_factory as ff
 from datetime import date
 import plotly.graph_objs as go
 
-def createImage(df):
-    fig = ff.create_table(df, index=False)
-    fig.layout.width = 250
-    fig.layout.update({'title': 'Starry Night'})
-    fig.write_image("image.png", scale=2)
-
 today = date.today()
 formatted_date_2 = today.strftime("%B/%d/%Y") # Day/month/year
 
@@ -116,17 +110,32 @@ if data['selected_rows'] is not None:
                             onRowDragMove = onRowDragMove)
     gridOptions2 = gb2.build()
 
+
+
     
     AgGrid(selected,
            gridOptions=gridOptions2,
            allow_unsafe_jscode=True,
-           theme='Inventory',
+           theme='fresh',
            fit_columns_on_grid_load=True)
     
     for i in selected['Length']:
         sum = sum + get_sec(i)
     st.markdown('''
         **Total:** :red[{}] minutes'''.format(round(sum/60, 2)))
+    
+    check = st.checkbox('Include venue')
+    if check:
+        venue=st.text_input('Venue name')
+        title = '{} {}'.format(venue, today)
+    
+    def createImage(df):
+        fig = ff.create_table(df, index=False)
+        fig.layout.width = 250
+        fig.layout.update({'title': '{}'.format(title)})
+        fig.update_layout({'margin': {'t': 50}})
+        fig.write_image("image.png", scale=2)
+        
     
     createImage(selected['Name'].reset_index())
 
@@ -136,6 +145,7 @@ else:
     pass
 ''
 with open("image.png", "rb") as file:
+        
         st.download_button(
             "Download Image",
             data=file,
