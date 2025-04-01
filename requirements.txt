@@ -1,6 +1,6 @@
 authlib==1.5.1
 blinker==1.9.0
-bokeh==3.7.2
+bokeh
 GitPython==3.1.44
 GitPython==3.1.44
 google_api_python_client==2.166.0
