@@ -1,3 +1,7 @@
-streamlit-aggrid==0.2.3
+streamlit-aggrid
 plotly
 pandas
+streamlit
+itertools
+time
+datetime
