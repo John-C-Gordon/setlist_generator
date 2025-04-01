@@ -16,4 +16,4 @@ traitlets
 typing_extensions
 watchdog
 xarray
-st-aggrid
+st_aggrid
