@@ -128,6 +128,8 @@ if data['selected_rows'] is not None:
     if check:
         venue=st.text_input('Venue name')
         title = '{} {}'.format(venue, today)
+    else
+        title = '{}'.format(today)
     
     def createImage(df):
         fig = ff.create_table(df, index=False)
