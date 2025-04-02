@@ -129,6 +129,8 @@ if data['selected_rows'] is not None:
         sum = sum + get_sec(i)
     st.markdown('''
         **Total:** :red[{}] minutes'''.format(round(sum/60, 2)))
+
+    st.subheader('Download:')
     
     check = st.checkbox('Include Venue in Filename/Title')
     if check:
