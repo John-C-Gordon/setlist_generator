@@ -146,6 +146,7 @@ if data['selected_rows'] is not None:
         for i in range(len(fig.layout.annotations)):
             fig.layout.annotations[i].font.size = 15
             fig.layout.annotations[0].font.color = '#41466b'
+        fig.update_xaxes(color = '#FCFCFC')
         fig.write_image("image.png", scale=2)
         
     
