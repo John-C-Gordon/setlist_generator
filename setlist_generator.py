@@ -141,7 +141,7 @@ if data['selected_rows'] is not None:
         df[' '] = ''
         fig = ff.create_table(df, index=False)
         fig.layout.width = 475
-        fig.layout.update({'title': '{} \n{}'.format(title)})
+        fig.layout.update({'title': '{}'.format(title)})
         fig.update_layout({'margin': {'t': 50}})
         for i in range(len(fig.layout.annotations)):
             fig.layout.annotations[i].font.size = 15
