@@ -140,11 +140,12 @@ if data['selected_rows'] is not None:
         df[''] = ''
         df[' '] = ''
         fig = ff.create_table(df, index=False)
-        fig.layout.width = 475
+        fig.layout.width = 250
         fig.layout.update({'title': '{}'.format(title)})
         fig.update_layout({'margin': {'t': 50}})
         for i in range(len(fig.layout.annotations)):
             fig.layout.annotations[i].font.size = 15
+            fig.layout.annotations[0].font.color = '#41466b'
         fig.write_image("image.png", scale=2)
         
     
