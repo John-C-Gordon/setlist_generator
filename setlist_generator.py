@@ -82,7 +82,7 @@ function onRowDragMove(event) {
 data = pd.read_csv('cougar_songs.csv')[['Name','Length','Key']]
 
 gb1 = GridOptionsBuilder.from_dataframe(data)
-gb1.configure_column(field='Name', width=250, editable=True, filter=True)
+gb1.configure_column(field='Name', width=300, editable=True, filter=True)
 gb1.configure_column(field='Length', flex=1,
                      editable=True, filter=True)
 gb1.configure_column(field='Key', flex=1, editable=True, filter=True)
@@ -108,8 +108,8 @@ if data['selected_rows'] is not None:
     gb2.configure_default_column(rowDrag = False, rowDragManaged = True, rowDragEntireRow = True, 
                             rowDragMultiRow=True)
     gb2.configure_column('Name', rowDrag = True, rowDragEntireRow = True, width=250)
-    gb2.configure_column(field='Length', flex=1)
-    gb2.configure_column(field='Key', flex=1)
+    gb2.configure_column(field='Length', width=100)
+    gb2.configure_column(field='Key', width=100)
     gb2.configure_grid_options(rowDragManaged = True, onRowDragEnd = onRowDragEnd,
                             deltaRowDataMode = True, getRowNodeId = getRowNodeId, 
                             onGridReady = onGridReady, animateRows = True, 
