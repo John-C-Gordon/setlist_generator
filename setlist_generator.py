@@ -124,7 +124,7 @@ if data['selected_rows'] is not None:
     st.markdown('''
         **Total:** :red[{}] minutes'''.format(round(sum/60, 2)))
     
-    check = st.checkbox('Include Venue in Filename')
+    check = st.checkbox('Include Venue in Filename/Title')
     if check:
         venue=st.text_input('Venue Name:')
         title = '{} {}'.format(venue, today)
@@ -134,7 +134,7 @@ if data['selected_rows'] is not None:
     def createImage(df):
         fig = ff.create_table(df, index=False)
         fig.layout.width = 250
-        fig.layout.update({'title': '{}'.format(title)})
+        fig.layout.update({'title': '{} \n{}'.format(title, round(sum/60, 2))})
         fig.update_layout({'margin': {'t': 50}})
         fig.write_image("image.png", scale=2)
         
