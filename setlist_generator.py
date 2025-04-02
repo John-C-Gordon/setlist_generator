@@ -133,9 +133,9 @@ if data['selected_rows'] is not None:
     
     def createImage(df):
         fig = ff.create_table(df, index=False)
-        fig.layout.width = 250
+        fig.layout.width = 475
         fig.layout.update({'title': '{} \n{}'.format(title, round(sum/60, 2))})
-        fig.update_layout({'margin': {'t': 50}})
+        fig.update_layout({'margin': {'t': 100}})
         fig.write_image("image.png", scale=2)
         
     
