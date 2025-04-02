@@ -136,13 +136,19 @@ if data['selected_rows'] is not None:
         title = '{} {}'.format(venue, today)
     else:
         title = '{}'.format(today)
+
+    add_subtitle = st.checkbox('Include Total Length in Subtitle *(optional)*')
+
     
     def createImage(df):
         df[''] = ''
         df[' '] = ''
         fig = ff.create_table(df, index=False)
         fig.layout.width = 250
-        fig.layout.update({'title': '''{}'''.format(title)})
+        if add_subtitle:
+            fig.layout.update({'title': ('''{}<br><sup><b><i>{} min.</b></i></sup>'''.format(title, round(sum/60, 2)))})
+        else:
+            fig.layout.update({'title': ('''{}'''.format(title))})
         fig.update_layout({'margin': {'t': 50}})
         for i in range(len(fig.layout.annotations)):
             fig.layout.annotations[i].font.size = 15
