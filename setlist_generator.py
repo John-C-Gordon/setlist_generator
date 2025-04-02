@@ -82,6 +82,9 @@ function onRowDragMove(event) {
 data = pd.read_csv('cougar_songs.csv')[['Name','Length','Key']]
 
 gb1 = GridOptionsBuilder.from_dataframe(data)
+gb1.configure_column(field='Name', width=600, editable=True, filter=True)
+gb1.configure_column(field='Length', flex=3, editable=True, filter=True)
+gb1.configure_column(field='Key', flex=3, editable=True, filter=True)
 gb1.configure_selection(selection_mode='multiple', use_checkbox=True)
 gridOptions = gb1.build()
 
@@ -103,7 +106,9 @@ if data['selected_rows'] is not None:
     gb2 = GridOptionsBuilder.from_dataframe(selected)
     gb2.configure_default_column(rowDrag = False, rowDragManaged = True, rowDragEntireRow = True, 
                             rowDragMultiRow=True)
-    gb2.configure_column('Name', rowDrag = True, rowDragEntireRow = True)
+    gb2.configure_column('Name', rowDrag = True, rowDragEntireRow = True, width=600)
+    gb2.configure_column(field='Length', flex=3)
+    gb2.configure_column(field='Key', flex=3)
     gb2.configure_grid_options(rowDragManaged = True, onRowDragEnd = onRowDragEnd,
                             deltaRowDataMode = True, getRowNodeId = getRowNodeId, 
                             onGridReady = onGridReady, animateRows = True, 
@@ -132,10 +137,14 @@ if data['selected_rows'] is not None:
         title = '{}'.format(today)
     
     def createImage(df):
+        df[''] = ''
+        df[' '] = ''
         fig = ff.create_table(df, index=False)
         fig.layout.width = 475
-        fig.layout.update({'title': '{} \n{}'.format(title, round(sum/60, 2))})
-        fig.update_layout({'margin': {'t': 100}})
+        fig.layout.update({'title': '{} \n{}'.format(title)})
+        fig.update_layout({'margin': {'t': 50}})
+        for i in range(len(fig.layout.annotations)):
+            fig.layout.annotations[i].font.size = 15
         fig.write_image("image.png", scale=2)
         
     
