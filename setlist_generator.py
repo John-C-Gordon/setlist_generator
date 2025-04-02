@@ -79,7 +79,7 @@ function onRowDragMove(event) {
 """)
 
 
-data = pd.read_csv('cougar_songs.csv')
+data = pd.read_csv('cougar_songs.csv')[['Name','Length','Key']]
 
 gb1 = GridOptionsBuilder.from_dataframe(data)
 gb1.configure_selection(selection_mode='multiple', use_checkbox=True)
