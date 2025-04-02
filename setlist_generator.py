@@ -82,10 +82,10 @@ function onRowDragMove(event) {
 data = pd.read_csv('cougar_songs.csv')[['Name','Length','Key']]
 
 gb1 = GridOptionsBuilder.from_dataframe(data)
-gb1.configure_column(field='Name', width=300, editable=True, filter=True)
+gb1.configure_column(field='Name', width=300, editable=False, filter=True)
 gb1.configure_column(field='Length', flex=1,
-                     editable=True, filter=True)
-gb1.configure_column(field='Key', flex=1, editable=True, filter=True)
+                     editable=False, filter=True)
+gb1.configure_column(field='Key', flex=1, editable=False, filter=True)
 gb1.configure_selection(selection_mode='multiple', use_checkbox=True)
 gridOptions = gb1.build()
 
