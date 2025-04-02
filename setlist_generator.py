@@ -124,9 +124,9 @@ if data['selected_rows'] is not None:
     st.markdown('''
         **Total:** :red[{}] minutes'''.format(round(sum/60, 2)))
     
-    check = st.checkbox('Include venue')
+    check = st.checkbox('Include Venue in Filename')
     if check:
-        venue=st.text_input('Venue name')
+        venue=st.text_input('Venue Name:')
         title = '{} {}'.format(venue, today)
     else:
         title = '{}'.format(today)
