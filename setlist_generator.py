@@ -113,7 +113,10 @@ gb1.configure_column(field='Length', flex=1,
                      editable=True, filter=True, suppressMovable=True)
 gb1.configure_column(field='Key', flex=1, editable=True, filter=True, suppressMovable=True)
 gb1.configure_selection(selection_mode='multiple', use_checkbox=True)
+gb1.configure_column(field='ArtistName', hide = True)
 gridOptions = gb1.build()
+gridOptions['getRowStyle'] = getRowStyle
+
 
 data = AgGrid(data,
             gridOptions=gridOptions,
