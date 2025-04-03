@@ -133,7 +133,7 @@ if data['selected_rows'] is not None:
     selected = pd.DataFrame(data['selected_rows'].reset_index(drop=True))
     selected.index = selected.index + 1
 
-    gb2 = GridOptionsBuilder.from_dataframe(selected)
+    gb2 = GridOptionsBuilder.from_dataframe(selected[['Name', 'Length', 'Key']])
     gb2.configure_default_column(rowDrag = False, rowDragManaged = True, rowDragEntireRow = True, 
                             rowDragMultiRow=True, suppressMovable=True)
     gb2.configure_column('Name', rowDrag = True, rowDragEntireRow = True, width=250, suppressMovable=True)
