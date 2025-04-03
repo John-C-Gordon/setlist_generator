@@ -136,7 +136,7 @@ if data['selected_rows'] is not None:
     gb2 = GridOptionsBuilder.from_dataframe(selected)
     gb2.configure_default_column(rowDrag = False, rowDragManaged = True, rowDragEntireRow = True, 
                             rowDragMultiRow=True, suppressMovable=True)
-    gb2.configure_column('Name', rowDrag = True, rowDragEntireRow = True, width=250)
+    gb2.configure_column('Name', rowDrag = True, rowDragEntireRow = True, width=250, suppressMovable=True)
     gb2.configure_column(field='Length', width=100, suppressMovable=True)
     gb2.configure_column(field='Key', width=100, suppressMovable=True)
     gb2.configure_grid_options(rowDragManaged = True, onRowDragEnd = onRowDragEnd,
