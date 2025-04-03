@@ -77,9 +77,35 @@ function onRowDragMove(event) {
     }
 }
 """)
+getRowStyle = JsCode("""
+            function(params) {
+                if (params.data.ArtistName != 'Cougar Beatrice') {
+                    return {
+                        'backgroundColor': 'lavender'
+                    }
+                }
+            };
+            """)
 
 
 data = pd.read_csv('cougar_songs.csv')[['Name','Length','Key']]
+data['ArtistName'] = 'Cougar Beatrice'
+covers = pd.read_csv('jammin.csv')[['Track Name', 'Duration (ms)', 'Key', 'Artist Name(s)']]
+ 
+def format_milliseconds(ms):
+    """Converts milliseconds to mm:ss format."""
+    seconds = (ms / 1000) % 60
+    minutes = (ms / (1000 * 60)) % 60
+    return f"{int(minutes):2}:{int(seconds):02}"
+
+covers['Length'] = covers['Duration (ms)'].apply(format_milliseconds)
+covers['Name'] = covers['Track Name']
+covers['ArtistName'] = covers['Artist Name(s)']
+covers = covers[['Name', 'Length', 'Key', 'ArtistName']]
+
+include_covers = st.checkbox('Include covers *(optional)*')
+if include_covers:
+    data = pd.concat([data, covers])
 
 gb1 = GridOptionsBuilder.from_dataframe(data)
 gb1.configure_column(field='Name', width=300, editable=True, filter=True, suppressMovable=True)
