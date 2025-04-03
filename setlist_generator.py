@@ -107,7 +107,7 @@ include_covers = st.checkbox('Include covers *(optional)*')
 if include_covers:
     data = pd.concat([data, covers])
 
-gb1 = GridOptionsBuilder.from_dataframe(data)
+gb1 = GridOptionsBuilder.from_dataframe(data[['Name', 'Length', 'Key']])
 gb1.configure_column(field='Name', width=300, editable=True, filter=True, suppressMovable=True)
 gb1.configure_column(field='Length', flex=1,
                      editable=True, filter=True, suppressMovable=True)
