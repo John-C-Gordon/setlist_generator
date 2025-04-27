@@ -4,31 +4,31 @@ on:
   schedule:
     - cron: '0 0 * * *' # Runs every day at midnight UTC
 
-jobs:
-  update:
-    runs-on: ubuntu-latest
-    
-    steps:
-   - name: Checkout repository
-     uses: actions/checkout@v2
-
-   - name: Update file with current timestamp
-     run: echo "Last updated: $(date)" >> README.md
-
-   - name: Set up Git config
-     run: |
-       git config --global user.name 'GitHub Actions'
-       git config --global user.email 'actions@github.com'
-
-   - name: Commit and push changes
-     env:
-       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-     run: |
-       git add README.md
-       # Only commit if there are changes
-       if git diff-index --quiet HEAD; then
-         echo "No changes to commit"
-       else
-         git commit -m "Automated update of timestamp in README.md"
-         git push
-       fi
+  jobs:
+    update:
+      runs-on: ubuntu-latest
+      
+      steps:
+     - name: Checkout repository
+       uses: actions/checkout@v2
+  
+     - name: Update file with current timestamp
+       run: echo "Last updated: $(date)" >> README.md
+  
+     - name: Set up Git config
+       run: |
+         git config --global user.name 'GitHub Actions'
+         git config --global user.email 'actions@github.com'
+  
+     - name: Commit and push changes
+       env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       run: |
+         git add README.md
+         # Only commit if there are changes
+         if git diff-index --quiet HEAD; then
+           echo "No changes to commit"
+         else
+           git commit -m "Automated update of timestamp in README.md"
+           git push
+         fi
