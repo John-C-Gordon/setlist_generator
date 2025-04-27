@@ -13,7 +13,8 @@ jobs:
        uses: actions/checkout@v2
   
      - name: Update file with current timestamp
-       run: echo "Last updated: \$(date)" >> README.md
+       run:
+         echo "Last updated: \$(date)" >> README.md
   
      - name: Set up Git config
        run: |
