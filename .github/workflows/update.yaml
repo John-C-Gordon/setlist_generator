@@ -32,5 +32,6 @@ jobs:
            echo "No changes to commit"
          else
            git commit -m "Automated update of timestamp in README.md"
+           git remote set-url origin https://${{ secrets.GITHUB_TOKEN}}@github.com/John-C-Gordon/setlist_generator.git
            git push
          fi
