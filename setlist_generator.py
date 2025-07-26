@@ -7,6 +7,9 @@ from datetime import timedelta
 import plotly.figure_factory as ff
 from datetime import date
 import plotly.graph_objs as go
+import kaleido
+
+kaleido.get_chrome_sync()
 
 today = date.today()
 formatted_date_2 = today.strftime("%B/%d/%Y") # Day/month/year
