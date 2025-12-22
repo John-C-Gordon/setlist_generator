@@ -1,3 +1,4 @@
+import io
 import streamlit as st  # pip install streamlit=1.12.0
 import pandas as pd
 from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, JsCode # pip install streamlit-aggrid==0.2.3
@@ -7,7 +8,7 @@ from datetime import timedelta
 import plotly.figure_factory as ff
 from datetime import date
 import plotly.graph_objs as go
-import io
+
 
 # kaleido.get_chrome_sync()
 
