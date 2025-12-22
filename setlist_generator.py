@@ -197,13 +197,13 @@ if data['selected_rows'] is not None:
     # The button must be inside the 'if' block so it only runs 
     # after the image is actually created.
     with open("image.png", "rb") as file:
-            st.download_button(
-                label="Download Image",
-                data=file,
-                file_name="setlist {}.png".format(formatted_date_2),
-                mime="image/png"  # Fix 2: Correct MIME type
-                # Fix 3: Removed 'icon' and 'on_click' (see explanation below)
-            )
+        st.download_button(
+            label="Download Image",
+            data=file,
+            file_name="setlist {}.png".format(formatted_date_2),
+            mime="image/png"  # Fix 2: Correct MIME type
+            # Fix 3: Removed 'icon' and 'on_click' (see explanation below)
+        )
 
     else:
-            st.info("Select rows to generate a setlist.")
+        st.info("Select rows to generate a setlist.")
