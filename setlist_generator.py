@@ -130,10 +130,11 @@ data = AgGrid(data,
 
 # st.dataframe(data['selected_rows'])
 
-if data['selected_rows'] is not None:
-    st.subheader("Setlist")
+st.subheader("Setlist")
 
-    selected = pd.DataFrame(data['selected_rows'].reset_index(drop=True))
+    # FIX 1: Correctly convert list to DataFrame first, THEN reset index
+    selected = pd.DataFrame(data['selected_rows'])
+    selected = selected.reset_index(drop=True) 
     selected.index = selected.index + 1
 
     gb2 = GridOptionsBuilder.from_dataframe(selected[['Name', 'Length', 'Key']])
@@ -166,44 +167,52 @@ if data['selected_rows'] is not None:
     
     check = st.checkbox('Include Venue in Filename/Title')
     if check:
-        venue=st.text_input('Venue Name:')
+        venue = st.text_input('Venue Name:')
         title = '{} {}'.format(venue, today)
     else:
         title = '{}'.format(today)
 
     add_subtitle = st.checkbox('Include Total Length in Subtitle *(optional)*')
 
+    # Logic to create the figure
+    # Note: We do NOT define a function here, we just run the logic linear
+    # to avoid scope issues.
     
-    def createImage(df):
-        df[''] = ''
-        df[' '] = ''
-        fig = ff.create_table(df, index=False)
-        fig.layout.width = 250
-        if add_subtitle:
-            fig.layout.update({'title': ('''{}<br><sup><b><i>{} min.</b></i></sup>'''.format(title, round(sum/60, 2)))})
-        else:
-            fig.layout.update({'title': ('''{}'''.format(title))})
-        fig.update_layout({'margin': {'t': 50}})
-        for i in range(len(fig.layout.annotations)):
-            fig.layout.annotations[i].font.size = 15
-            fig.layout.annotations[0].font.color = '#41466b'
-        fig.update_xaxes(color = '#FCFCFC')
-        fig.write_image("image.png", scale=2)
+    # Prep data for image
+    df_img = selected['Name'].reset_index()
+    df_img[''] = ''
+    df_img[' '] = ''
+    
+    fig = ff.create_table(df_img, index=False)
+    fig.layout.width = 250
+    
+    if add_subtitle:
+        fig.layout.update({'title': ('''{}<br><sup><b><i>{} min.</b></i></sup>'''.format(title, round(sum/60, 2)))})
+    else:
+        fig.layout.update({'title': ('''{}'''.format(title))})
         
-    
-    createImage(selected['Name'].reset_index())
+    fig.update_layout({'margin': {'t': 50}})
+    for i in range(len(fig.layout.annotations)):
+        fig.layout.annotations[i].font.size = 15
+        fig.layout.annotations[0].font.color = '#41466b'
+    fig.update_xaxes(color = '#FCFCFC')
 
-    # Fix 1: Indentation
-    # The button must be inside the 'if' block so it only runs 
-    # after the image is actually created.
-    with open("image.png", "rb") as file:
+    # FIX 2: Use in-memory buffer instead of saving to disk
+    # This prevents file permission errors and file-lock issues
+    try:
+        # Convert figure to PNG bytes in memory
+        img_bytes = fig.to_image(format="png", scale=2)
+        
         st.download_button(
             label="Download Image",
-            data=file,
+            data=img_bytes,
             file_name="setlist {}.png".format(formatted_date_2),
-            mime="image/png"  # Fix 2: Correct MIME type
-            # Fix 3: Removed 'icon' and 'on_click' (see explanation below)
+            mime="image/png"
         )
+    except ValueError:
+        st.error("⚠️ Image generation failed. Please ensure the 'kaleido' library is installed (`pip install -U kaleido`).")
+    except Exception as e:
+        st.error(f"An error occurred generating the image: {e}")
 
 else:
-    st.info("Select rows to generate a setlist.")
+    st.info("Please select songs from the table above to generate a setlist.")
