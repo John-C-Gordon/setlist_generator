@@ -7,7 +7,7 @@ from datetime import timedelta
 import plotly.figure_factory as ff
 from datetime import date
 import plotly.graph_objs as go
-
+import io
 
 # kaleido.get_chrome_sync()
 
