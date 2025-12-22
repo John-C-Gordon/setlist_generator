@@ -3,4 +3,4 @@ plotly
 pandas
 streamlit
 datetime
-kaleido==0.1.*
+kaleido==0.2.1
