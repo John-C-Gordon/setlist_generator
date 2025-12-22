@@ -205,5 +205,5 @@ if data['selected_rows'] is not None:
             # Fix 3: Removed 'icon' and 'on_click' (see explanation below)
         )
 
-    else:
-        st.info("Select rows to generate a setlist.")
+else:
+    st.info("Select rows to generate a setlist.")
