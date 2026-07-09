@@ -180,8 +180,6 @@ if data['selected_rows'] is not None:
     
     # Prep data for image
     df_img = selected['Name']
-    df_img[''] = ''
-    df_img[' '] = ''
     
     fig = ff.create_table(df_img, index=False)
     fig.layout.width = 250
