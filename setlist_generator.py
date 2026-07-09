@@ -179,7 +179,7 @@ if data['selected_rows'] is not None:
     # to avoid scope issues.
     
     # Prep data for image
-    df_img = selected['Name'].reset_index()
+    df_img = selected['Name']
     df_img[''] = ''
     df_img[' '] = ''
     
